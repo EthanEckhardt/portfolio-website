@@ -8,7 +8,7 @@ export function NavMenu() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 200) {
+      if (window.scrollY > window.innerHeight) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
