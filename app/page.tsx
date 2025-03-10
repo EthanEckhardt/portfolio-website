@@ -2,6 +2,7 @@
 
 import { BackToTop } from "@/components/back-to-top";
 import { Footer } from "@/components/footer";
+import { NavMenu } from "@/components/nav-menu";
 import { ScrollSection } from "@/components/scroll-section";
 import { HeroSection } from "@/components/sections/hero";
 import { ProjectSection } from "@/components/sections/projects";
@@ -26,7 +27,10 @@ export default function Home() {
 
   return (
     <div ref={scrollRef} className="w-screen h-fit overflow-x-hidden">
-      <BackToTop />
+      <>
+        <BackToTop />
+        <NavMenu />
+      </>
       <ScrollSection className="justify-between">
         <HeroSection />
       </ScrollSection>
