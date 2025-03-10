@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
 import Image from "next/image";
+import { Button } from "../ui/button";
 
 export function HeroSection() {
   return (
@@ -31,6 +32,42 @@ export function HeroSection() {
         <h2 className="scroll-m-20 pb-2 text-lg text-white font-mono font-semibold tracking-tight first:mt-0 lg:text-2xl">
           Full-Stack Software Engineer
         </h2>
+        <br />
+        <motion.div
+          initial={{ opacity: 0, y: 100 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            opacity: {
+              type: "tween",
+              duration: 0.5,
+              delay: 1,
+              ease: "easeInOut",
+            },
+            y: {
+              type: "tween",
+              duration: 1,
+              delay: 1,
+              ease: [0, 0.71, 0.2, 1.01],
+            },
+          }}
+          className="flex flex-col"
+        >
+          <Button
+            variant="ghost"
+            size="lg"
+            className="text-white text-xl font-mono justify-start underline"
+          >
+            Projects
+          </Button>
+          <Button
+            variant="ghost"
+            size="lg"
+            className="text-white text-xl font-mono justify-start underline"
+          >
+            Proficiencies
+          </Button>
+        </motion.div>
       </motion.div>
       <motion.div
         initial={{ opacity: 0, x: 100 }}
