@@ -21,18 +21,20 @@ export function HeroSection() {
             ease: [0, 0.71, 0.2, 1.01],
           },
         }}
-        className="flex flex-col justify-center h-full w-fit min-w-fit"
+        className="flex flex-col justify-between h-full w-fit min-w-fit pr-4"
       >
-        <h1 className="text-white scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl">
-          Ethan
-        </h1>
-        <h1 className="text-white scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl">
-          Eckhardt
-        </h1>
-        <h2 className="scroll-m-20 pb-2 text-lg text-white font-mono font-semibold tracking-tight first:mt-0 lg:text-2xl">
-          Full-Stack Software Engineer
-        </h2>
-        <br />
+        <div></div>
+        <div>
+          <h1 className="scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl">
+            Ethan
+          </h1>
+          <h1 className="scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl">
+            Eckhardt
+          </h1>
+          <h2 className="scroll-m-20 pb-2 text-lg font-mono font-semibold tracking-tight first:mt-0 lg:text-2xl">
+            Full-Stack Software Engineer
+          </h2>
+        </div>
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,19 +53,19 @@ export function HeroSection() {
               ease: [0, 0.71, 0.2, 1.01],
             },
           }}
-          className="flex flex-col"
+          className="flex flex-col py-4"
         >
           <Button
             variant="ghost"
             size="lg"
-            className="text-white text-xl font-mono justify-start underline"
+            className="text-xl font-mono justify-start underline"
           >
             Projects
           </Button>
           <Button
             variant="ghost"
             size="lg"
-            className="text-white text-xl font-mono justify-start underline"
+            className="text-xl font-mono justify-start underline"
           >
             Proficiencies
           </Button>
@@ -88,13 +90,14 @@ export function HeroSection() {
             ease: [0, 0.71, 0.2, 1.01],
           },
         }}
-        className="w-full flex flex-col justify-center items-center"
+        className="w-full flex flex-col justify-center items-center overflow-hidden"
       >
         <Image
-          src="https://images.unsplash.com/photo-1739467372234-2aba33f6b7ee?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="/purple.jpg"
           alt="tower"
-          width={6020}
-          height={8027}
+          width={2916}
+          height={3888}
+          priority
           className="h-screen w-fit min-w-fit"
         />
       </motion.div>

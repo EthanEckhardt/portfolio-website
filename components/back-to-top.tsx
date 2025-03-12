@@ -33,6 +33,7 @@ export function BackToTop() {
       >
         <Button
           size="icon"
+          variant="secondary"
           className="opacity-80 hover:opacity-100"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
         >
