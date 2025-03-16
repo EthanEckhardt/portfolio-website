@@ -72,7 +72,7 @@ export default function Contact() {
   }, []);
 
   return (
-    <ScrollSection className="justify-center items-center">
+    <ScrollSection className="justify-center items-center bg-linear-to-t from-background to-primary from-40% to-100% text-secondary-foreground">
       <div className="fixed top-0 left-0 p-4">
         <Link href="/">
           <Button variant="ghost">
@@ -100,7 +100,11 @@ export default function Contact() {
                   <FormItem>
                     <FormLabel>Name</FormLabel>
                     <FormControl>
-                      <Input placeholder="Ethan Eckhardt" {...field} />
+                      <Input
+                        placeholder="Ethan Eckhardt"
+                        className="bg-background"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -113,7 +117,11 @@ export default function Contact() {
                   <FormItem>
                     <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="example@gmail.com" {...field} />
+                      <Input
+                        placeholder="example@gmail.com"
+                        className="bg-background"
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -130,7 +138,7 @@ export default function Contact() {
                     <Textarea
                       placeholder={messagePlaceholder}
                       {...field}
-                      className="h-50"
+                      className="h-50 bg-background"
                     />
                   </FormControl>
                   <FormMessage />

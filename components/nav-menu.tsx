@@ -1,7 +1,17 @@
 import { Menu } from "lucide-react";
 import { motion } from "motion/react";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "./ui/dropdown-menu";
+import { ThemeSwitch } from "./ui/theme-switch";
 
 export function NavMenu() {
   const [isVisible, setIsVisible] = useState(false);
@@ -29,13 +39,31 @@ export function NavMenu() {
       transition={{ duration: 0.2, type: "spring" }}
       className="fixed top-0 left-0 p-4"
     >
-      <Button
-        size="icon"
-        variant="secondary"
-        className="opacity-80 hover:opacity-100"
-      >
-        <Menu />
-      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button
+            size="icon"
+            variant="secondary"
+            className="opacity-80 hover:opacity-100"
+          >
+            <Menu />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent side="bottom" align="start" className="w-40">
+          <DropdownMenuLabel>Pages</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          {/* <Link href="/blog">
+            <DropdownMenuItem>Blog</DropdownMenuItem>
+          </Link> */}
+          <DropdownMenuItem>Projects</DropdownMenuItem>
+          <DropdownMenuItem>Proficiencies</DropdownMenuItem>
+          <Link href="/contact">
+            <DropdownMenuItem>Contact Me</DropdownMenuItem>
+          </Link>
+          <DropdownMenuSeparator />
+          <ThemeSwitch />
+        </DropdownMenuContent>
+      </DropdownMenu>
     </motion.div>
   );
 }

@@ -10,7 +10,9 @@ const sectionVariants = cva(
     variants: {
       variant: {
         default: "bg-background text-foreground",
-        secondary: "bg-secondary text-secondary-foreground ",
+        secondary: "bg-secondary text-secondary-foreground",
+        gradient:
+          "bg-linear-to-tr from-background to-primary text-secondary-foreground",
       },
     },
     defaultVariants: {

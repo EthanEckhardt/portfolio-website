@@ -6,7 +6,6 @@ import { NavMenu } from "@/components/nav-menu";
 import { ScrollSection } from "@/components/scroll-section";
 import { HeroSection } from "@/components/sections/hero";
 import { ProjectSection } from "@/components/sections/projects";
-import { ThemeSwitch } from "@/components/ui/theme-switch";
 import { useRef } from "react";
 
 export const quickEnter = {
@@ -31,24 +30,17 @@ export default function Home() {
       <>
         <BackToTop />
         <NavMenu />
-        <ThemeSwitch />
       </>
-      <ScrollSection className="justify-between">
+      <ScrollSection variant="gradient">
         <HeroSection />
       </ScrollSection>
-      <ScrollSection
-        variant="secondary"
-        className="items-center justify-center"
-      >
-        <ProjectSection scrollRef={scrollRef} />
-      </ScrollSection>
-      <ScrollSection
-        variant="secondary"
-        className="items-center justify-center"
-      >
-        <h1>Proficiencies</h1>
+      <ScrollSection className="items-center justify-center">
+        <ProjectSection />
       </ScrollSection>
       <ScrollSection className="items-center justify-center">
+        <h1>Proficiencies</h1>
+      </ScrollSection>
+      <ScrollSection className="items-center justify-center bg-linear-to-bl from-background to-primary  ">
         <Footer />
       </ScrollSection>
     </div>

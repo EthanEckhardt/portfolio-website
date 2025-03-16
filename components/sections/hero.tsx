@@ -1,106 +1,94 @@
 import { motion } from "motion/react";
 import Image from "next/image";
-import { Button } from "../ui/button";
 
 export function HeroSection() {
+  // Define animation variants
+  const containerVariants = {
+    hidden: {
+      opacity: 0,
+      x: -20,
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 1,
+        ease: "easeInOut",
+        staggerChildren: 0.5,
+      },
+    },
+  };
+
+  const childVariants = {
+    hidden: {
+      opacity: 0,
+      x: -20, // Slight downward offset
+    },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.5,
+        ease: "easeInOut",
+      },
+    },
+  };
+
   return (
-    <>
+    <div className="flex flex-col-reverse md:flex-row justify-between w-full">
       <motion.div
-        initial={{ opacity: 0, x: -100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          duration: 1,
-          opacity: {
-            type: "tween",
-            duration: 0.5,
-            ease: "easeInOut",
-          },
-          x: {
-            type: "tween",
-            duration: 1,
-            ease: [0, 0.71, 0.2, 1.01],
-          },
-        }}
-        className="flex flex-col justify-between h-full w-fit min-w-fit pr-4"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="flex flex-col h-fit w-fit min-w-fit p-4 md:h-full md:justify-end"
       >
-        <div></div>
-        <div>
-          <h1 className="scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl">
-            Ethan
-          </h1>
-          <h1 className="scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl">
-            Eckhardt
-          </h1>
-          <h2 className="scroll-m-20 pb-2 text-lg font-mono font-semibold tracking-tight first:mt-0 lg:text-2xl">
-            Full-Stack Software Engineer
-          </h2>
-        </div>
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-            opacity: {
-              type: "tween",
-              duration: 0.5,
-              delay: 1,
-              ease: "easeInOut",
-            },
-            y: {
-              type: "tween",
-              duration: 1,
-              delay: 1,
-              ease: [0, 0.71, 0.2, 1.01],
-            },
-          }}
-          className="flex flex-col py-4"
+        <motion.h1
+          variants={childVariants}
+          className="scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl"
         >
-          <Button
-            variant="ghost"
-            size="lg"
-            className="text-xl font-mono justify-start underline"
-          >
-            Projects
-          </Button>
-          <Button
-            variant="ghost"
-            size="lg"
-            className="text-xl font-mono justify-start underline"
-          >
-            Proficiencies
-          </Button>
-        </motion.div>
+          Ethan
+        </motion.h1>
+        <motion.h1
+          variants={childVariants}
+          className="scroll-m-20 text-4xl font-sans font-extrabold tracking-tight lg:text-6xl"
+        >
+          Eckhardt
+        </motion.h1>
+        <motion.h2
+          variants={childVariants}
+          className="scroll-m-20 pb-2 text-lg font-mono font-semibold tracking-tight first:mt-0 lg:text-2xl"
+        >
+          Full-Stack Software Engineer
+        </motion.h2>
       </motion.div>
       <motion.div
-        initial={{ opacity: 0, x: 100 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{
-          duration: 1,
-          delay: 1,
-          opacity: {
-            type: "tween",
-            duration: 0.5,
-            delay: 1,
-            ease: "easeInOut",
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: {
+            opacity: 0,
+            y: 20,
           },
-          x: {
-            type: "tween",
-            duration: 1,
-            delay: 1,
-            ease: [0, 0.71, 0.2, 1.01],
+          visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+              duration: 1,
+              ease: "easeInOut",
+              delay: 1.5,
+            },
           },
         }}
-        className="w-full flex flex-col justify-center items-center overflow-hidden"
+        className="w-full flex md:justify-center items-center h-screen overflow-hidden"
       >
         <Image
-          src="/purple.jpg"
-          alt="tower"
+          src="/purple.JPG"
+          alt="purple"
           width={2916}
           height={3888}
-          priority
-          className="h-screen w-fit min-w-fit"
+          className="size-1/2 md:size-100 aspect-square rounded-full inset-shadow-sm inset-shadow-black"
         />
       </motion.div>
-    </>
+    </div>
   );
 }
