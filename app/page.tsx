@@ -8,20 +8,6 @@ import { HeroSection } from "@/components/sections/hero";
 import { ProjectSection } from "@/components/sections/projects";
 import { useRef } from "react";
 
-export const quickEnter = {
-  duration: 1,
-  opacity: {
-    type: "tween",
-    duration: 0.2,
-    ease: "easeInOut",
-  },
-  x: {
-    type: "tween",
-    duration: 0.5,
-    ease: [0, 0.71, 0.2, 1.01],
-  },
-};
-
 export default function Home() {
   const scrollRef = useRef(null);
 

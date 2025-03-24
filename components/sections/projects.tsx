@@ -1,10 +1,23 @@
-import { quickEnter } from "@/app/page";
 import { ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import { Button } from "../ui/button";
+import { Button, buttonVariants } from "../ui/button";
+
+const quickEnter = {
+  duration: 1,
+  opacity: {
+    type: "tween",
+    duration: 0.2,
+    ease: "easeInOut",
+  },
+  x: {
+    type: "tween",
+    duration: 0.5,
+    ease: [0, 0.71, 0.2, 1.01],
+  },
+};
 
 export function ProjectSection() {
   const [selectedProject, setSelectedProject] = useState(0);
@@ -13,20 +26,21 @@ export function ProjectSection() {
     {
       title: "Thor Robot Arm",
       description:
-        "Thor is an Open Source and printable robot arm with six degrees of freedom. Its configuration (yaw-roll-roll-yaw-roll-yaw) is the same used by most of the manipulator robots on the market. In its extended position, Thor is about 625mm high and can lift loads up to 750 grams.",
+        "Created by Angel L.M., Thor is an Open Source and printable robot arm with six degrees of freedom. Its configuration (yaw-roll-roll-yaw-roll-yaw) is the same used by most of the manipulator robots on the market. In its extended position, Thor is about 625mm high and can lift loads up to 750 grams.",
       imageUrl: "/purple.JPG",
       externalLink: "http://thor.angel-lm.com/",
     },
     {
       title: "TOTEM Wireless Keyboard",
       description:
-        "TOTEM is a 38 key column-staggered choc split keyboard. It features a 3D printed case, and is fully programmable. My layout of choice is the Colemak Mod-DH Miryoku layout, which allows me to type with a more natural hand position and reduces finger movement. I use this keyboard at work for all of my programming.",
+        "Created by GEIGEIGEIST, TOTEM is a 38 key column-staggered choc split keyboard. It features a 3D printed case, and is fully programmable. My layout of choice is the Colemak Mod-DH Miryoku layout, which allows me to type with a more natural hand position and reduces finger movement. I use this keyboard at work for all of my programming.",
       imageUrl: "/purple.JPG",
       externalLink: "https://github.com/GEIGEIGEIST/TOTEM",
     },
     {
-      title: "Portfolio Website",
-      description: "Description of Project 3",
+      title: "Bolder",
+      description:
+        "Bolder is the climbing training sofware for nerds. Bolder allows you to create detailed, cyclic training programs and export them to your calendar app of choice. It will also allow you to track your progress and share your training with your friends or teammates. Bolder is currently in development, so stay tuned for updates!",
       imageUrl: "/purple.JPG",
       externalLink: "",
     },
@@ -57,11 +71,13 @@ export function ProjectSection() {
             ))}
           </div>
           {projects[selectedProject].externalLink !== "" && (
-            <Link href={projects[selectedProject].externalLink} target="_blank">
-              <Button variant="ghost">
-                Learn More
-                <ExternalLink />
-              </Button>
+            <Link
+              href={projects[selectedProject].externalLink}
+              target="_blank"
+              className={buttonVariants({ variant: "ghost" })}
+            >
+              Learn More
+              <ExternalLink />
             </Link>
           )}
         </div>
