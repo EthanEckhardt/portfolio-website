@@ -55,13 +55,7 @@ export default function Contact() {
   }
 
   const randomMessage = () => {
-    const messages = [
-      "Hello, Ethan!",
-      "I love your work!",
-      "Can you help me with a project?",
-      "I have a question.",
-      "I want to hire you!",
-    ];
+    const messages = ["", "", ""];
     return messages[Math.floor(Math.random() * messages.length)];
   };
 

@@ -3,6 +3,7 @@
 import { BackToTop } from "@/components/back-to-top";
 import { Footer } from "@/components/footer";
 import { NavMenu } from "@/components/nav-menu";
+import { ResumeSection } from "@/components/resume-section";
 import { ScrollSection } from "@/components/scroll-section";
 import { HeroSection } from "@/components/sections/hero";
 import { ProjectSection } from "@/components/sections/projects";
@@ -24,7 +25,7 @@ export default function Home() {
         <ProjectSection />
       </ScrollSection>
       <ScrollSection className="items-center justify-center">
-        <h1>Proficiencies</h1>
+        <ResumeSection />
       </ScrollSection>
       <ScrollSection className="items-center justify-center bg-linear-to-bl from-background to-primary  ">
         <Footer />
