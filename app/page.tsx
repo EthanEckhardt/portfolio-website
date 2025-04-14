@@ -21,10 +21,13 @@ export default function Home() {
       <ScrollSection variant="gradient">
         <HeroSection />
       </ScrollSection>
-      <ScrollSection className="items-center justify-center">
+      <ScrollSection id="projects" className="items-center justify-center">
         <ProjectSection />
       </ScrollSection>
-      <ScrollSection className="items-center justify-center">
+      <ScrollSection
+        id="resume"
+        className="items-center justify-center flex-col gap-8"
+      >
         <ResumeSection />
       </ScrollSection>
       <ScrollSection className="items-center justify-center bg-linear-to-bl from-background to-primary  ">

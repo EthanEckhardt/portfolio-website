@@ -50,13 +50,35 @@ export function NavMenu() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent side="bottom" align="start" className="w-40">
+          <DropdownMenuLabel>Sections</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem
+            onClick={() => {
+              const projectsElement = document.getElementById("projects");
+              if (projectsElement) {
+                projectsElement.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            Projects
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              const resumeElement = document.getElementById("resume");
+              if (resumeElement) {
+                resumeElement.scrollIntoView({ behavior: "smooth" });
+              }
+            }}
+          >
+            Proficiencies
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
           <DropdownMenuLabel>Pages</DropdownMenuLabel>
           <DropdownMenuSeparator />
-          {/* <Link href="/blog">
-            <DropdownMenuItem>Blog</DropdownMenuItem>
-          </Link> */}
-          <DropdownMenuItem>Projects</DropdownMenuItem>
-          <DropdownMenuItem>Proficiencies</DropdownMenuItem>
+
+          <Link href="/notes">
+            <DropdownMenuItem>Notes Viewer</DropdownMenuItem>
+          </Link>
           <Link href="/contact">
             <DropdownMenuItem>Contact Me</DropdownMenuItem>
           </Link>
