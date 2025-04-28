@@ -17,6 +17,7 @@ import { ChevronLeft, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 import { z } from "zod";
 
 const formSchema = z.object({
@@ -51,7 +52,30 @@ export default function Contact() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
+    const data = {
+      from: values.email,
+      subject: `Contact Form Submission from ${values.name}`,
+      text: `Name: ${values.name}\nEmail: ${values.email}\nMessage: ${values.message}`,
+    };
+    fetch("/api/emailer", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (response.ok) {
+          toast("Email sent successfully!");
+          form.reset();
+        } else {
+          toast.error("Failed to send email. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        console.error("Error sending email:", error);
+        alert("An error occurred. Please try again later.");
+      });
   }
 
   const randomMessage = () => {
