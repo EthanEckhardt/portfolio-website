@@ -74,8 +74,8 @@ function ResumeTile(props: ResumeTileProps) {
       <div className="size-fit rounded-full bg-primary p-2">
         {props.data.icon}
       </div>
-      <h2 className="text-md font-semibold mt-1">{props.data.title}</h2>
-      <p className="text-sm font-mono mt-6">{props.data.description}</p>
+      <div className="text-md font-semibold mt-1">{props.data.title}</div>
+      <div className="text-sm font-mono mt-6">{props.data.description}</div>
     </motion.div>
   );
 }
