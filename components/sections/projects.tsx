@@ -27,14 +27,14 @@ export function ProjectSection() {
       title: "Thor Robot Arm",
       description:
         "Created by Angel L.M., Thor is an Open Source and printable robot arm with six degrees of freedom. Its configuration (yaw-roll-roll-yaw-roll-yaw) is the same used by most of the manipulator robots on the market. In its extended position, Thor is about 625mm high and can lift loads up to 750 grams.",
-      imageUrl: "/purple.JPG",
+      imageUrl: "/thor.JPG",
       externalLink: "http://thor.angel-lm.com/",
     },
     {
       title: "TOTEM Wireless Keyboard",
       description:
         "Created by GEIGEIGEIST, TOTEM is a 38 key column-staggered choc split keyboard. It features a 3D printed case, and is fully programmable. My layout of choice is the Colemak Mod-DH Miryoku layout, which allows me to type with a more natural hand position and reduces finger movement. I use this keyboard at work for all of my programming.",
-      imageUrl: "/purple.JPG",
+      imageUrl: "/totem.JPG",
       externalLink: "https://github.com/GEIGEIGEIST/TOTEM",
     },
     {

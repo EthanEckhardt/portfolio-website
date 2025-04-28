@@ -81,13 +81,14 @@ export function HeroSection() {
         }}
         className="w-full flex md:justify-center items-center h-screen overflow-hidden"
       >
-        <Image
-          src="/purple.JPG"
-          alt="purple"
-          width={2916}
-          height={3888}
-          className="size-1/2 md:size-100 aspect-square rounded-full inset-shadow-sm inset-shadow-black"
-        />
+        <div className="relative size-64 md:size-100 flex">
+          <Image
+            src="/me.JPG"
+            alt="purple"
+            fill
+            className="object-cover rounded-full"
+          />
+        </div>
       </motion.div>
     </div>
   );
