@@ -1,6 +1,7 @@
 import { MarkdownRenderer } from "@/components/markown-renderer";
 
 export default function NotesViewer() {
+  // TODO: pull from mongoDB
   const note = {
     title: "Example",
     content: `Date: 2025-03-26
@@ -89,6 +90,7 @@ export default function NotesViewer() {
 ## Tags`,
   };
 
+  // TODO: separate into tabs
   return (
     <div className="w-dvw h-dvh overflow-x-scroll">
       <div className="w-fit flex flex-row">
