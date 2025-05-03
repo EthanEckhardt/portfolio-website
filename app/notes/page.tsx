@@ -10,8 +10,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import axios from "axios";
-import { PanelRightClose } from "lucide-react";
-import { useEffect, useState } from "react";
+import { ChevronLeft, PanelRightClose } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 export interface Note {
   _id: string;
@@ -120,17 +120,25 @@ export default function NotesViewer() {
         </div>
       </div>
       <div className="pl-10 w-fit flex flex-row">
+        <div
+          className="absolute flex w-fit pl-8 gap-4 pt-4 opacity-0 transition-opacity duration-500"
+          data-state={
+            sidebarOpen || openNotes.length > 0 ? "hidden" : "visible"
+          }
+          style={{
+            opacity: sidebarOpen || openNotes.length > 0 ? 0 : 1,
+          }}
+        >
+          <ChevronLeft />
+          <div>Open the Sidebar to select a note!</div>
+        </div>
         <div className="flex flex-row w-full">
           {openNotes.length > 0 &&
             openNotes.map((note) => (
-              <>
-                <MarkdownRenderer
-                  key={note._id}
-                  note={note}
-                  onClose={() => closeNote(note)}
-                />
+              <React.Fragment key={note._id}>
+                <MarkdownRenderer note={note} onClose={() => closeNote(note)} />
                 <Separator orientation="vertical" />
-              </>
+              </React.Fragment>
             ))}
         </div>
       </div>
