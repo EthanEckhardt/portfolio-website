@@ -1,104 +1,137 @@
+"use client";
+
 import { MarkdownRenderer } from "@/components/markown-renderer";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import axios from "axios";
+import { PanelRightClose } from "lucide-react";
+import { useEffect, useState } from "react";
+
+export interface Note {
+  _id: string;
+  title: string;
+  content: string;
+}
 
 export default function NotesViewer() {
-  // TODO: pull from mongoDB
-  const note = {
-    title: "Example",
-    content: `Date: 2025-03-26
-## Full Notes
-### Confucius
-- Confucianism is more like a cultural tradition
-- eventually in Chinese culture, Daoism, Confucianism, and buddhism started to be treated as complementary instead of conflicting
-- ideally speaking the fundamental realm of Daoism is the world of nature, including supernatural or transcendental dimensions
-- Confucianism is preoccupied with the social realm
-- Confucianism became a "civil religion" the formed the moral foundation for Chinese civilization
-- starting in the Han dynasty, it became the dominant cultural tradition
-- the term Confucianism was invented by Jesuit missionaries in China in the 16th century
-- it roughly covers what was usually referred to by terms such as the "school of the scholars" (ruija) or the "teaching of the scholars" (rujiao)
-- scholarly followers of the tradition were called ru "literati" or "scholars"
-- meritocracy system based on Confucian learning
-- Confucianism became the official ideology of the Chinese imperial state and the ruling elites
-- provided a comprehensive ethical system that shaped public morals and personal behavior
-    - woman are treated negatively
-- central part of the educational system in traditional China
-- starting in the 7th century, examination system based on Confucian scholarship
-- emphasis on study and educational attainment became an essential cultural value
-- elite class composed of two groups
-    - official-gentry (shen): passed all exams, acquired degrees, and held government positions
-    - scholar-gentry (shi): scholars outside the government
-    - all exams were based on Confucian classics
-    - the system produced generalists not specialists
-- Confucius
-    - other names: kongzi / kong fuzi / master kong
-    - objective of Confucius
-        - to reinstate the timeless Way (Dao) that was revealed and followed by the ancient sages, echoed the norms and designs of Heaven, and brought perfect harmony between Heaven and humanity
-        - traveled extensively late in life in search of a ruler who would implement his policies, which were meant to establish proper order in the state and society
-        - nobody wanted to listen to him, so he moved back to his native state and dedicated himself to teaching his disciples
-        - successful as an educator, attracting a sizable group of dedicated disciples that transmitted his teachings after his death
-        - first known individual to make teaching his job
-        - saw himself as a restorer not a founder of a religion or a new system
-- characteristics of the Confucian tradition
-    - orthodoxy-conscious tradition
-        - learning from the past and adapting them to the current time
-    - culture-conscious tradition
-        - looking at the culture of the past
-    - morally conscious tradition
-        - lots of emphasis on personal morality
-    - socially conscious tradition
-        - how does the individual fit into society
-    - "this-worldly" tradition
-        - focused on the issues in this life and not the afterlife
-    - through an ethical and virtuous life, humans maintain cosmic harmony
-    - self-cultivation happens within the society
-    - importance of lessons of history - recorded in literature - to learn how to act in the present
-### Confucianism
-- li and ren
-    - li (ritual propriety, ceremony, proper conduct)
-    - ren (humanity, benevolence, human-heartedness)
-    - mutually related
-        - without each other, they are useless alone
-    - acting according to the civilized practices of the normative tradition is a necessary ingredient of ren and making one's ren manifest through li is the only way in which li can be brought to life
-    - junzi is a man of virtue who fulfilled li and ren
-- situational ethics (the five key relationships)
-    - father-son
-    - ruler-subject
-    - brother-brother
-    - husband-wife
-    - friend-friend
-    - mostly hierarchical but also reciprocal
-    - summed up in the conceptions of li and ren
-- four features of the Chinese patriarchy
-    - property belongs the family, not the individual
-    - property belongs to the men and must be divided equally among brothers
-    - fathers have legal authority over women and children
-    - women are less capable than men and therefore must be under male control
-- kinship and gender
-    - decisively shaped by Confucian ethics
-    - as a son, you have an obligation to your parents to produce a son
-    - two principles of domestic hierarchy: age and gender
-    - the eldest male as the "CEO of the family corporation"
-    - worship at ancestral shrines as the means of reinforcing family hierarches through li
-- Confucius Institute
-    - teaches Chinese culture / language
-    - Confucius is revered as a teacher
-- Confucianism in Korea
-    - became extremely influential in Korea
-    - only country that preserved the biannual state-level worship ritual for Confucius and other Confucian sages
-    - individual household rituals, most importantly ancestor worship
-    - lots of Christians in Korea as well
+  const [religionNotes, setReligionNotes] = useState<Note[]>([]);
+  const [philosophyNotes, setPhilosophyNotes] = useState<Note[]>([]);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [openNotes, setOpenNotes] = useState<Note[]>([]);
 
-## Tags`,
+  useEffect(() => {
+    axios
+      .get("/api/notes", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      .then((response) => {
+        console.log("Response:", response.data);
+        setReligionNotes(response.data.world_religion);
+        setPhilosophyNotes(response.data.philosophy_of_food);
+      })
+      .catch((error) => {
+        console.error("Error fetching notes:", error);
+        alert("An error occurred. Please try again later.");
+      });
+  }, []);
+
+  const addNote = (note: Note) => {
+    if (openNotes.some((n) => n._id === note._id)) {
+      return;
+    } else if (openNotes.length >= 3) {
+      setOpenNotes((prevNotes) => [note, ...prevNotes.slice(1)]);
+      return;
+    }
+    setOpenNotes((prevNotes) => [...prevNotes, note]);
+  };
+
+  const closeNote = (note: Note) => {
+    setOpenNotes((prevNotes) => prevNotes.filter((n) => n._id !== note._id));
   };
 
   // TODO: separate into tabs
   return (
-    <div className="w-dvw h-dvh overflow-x-scroll">
-      <div className="w-fit flex flex-row">
+    <div className="w-dvw h-dvh overflow-x-scroll overflow-y-hidden">
+      <div
+        data-state={sidebarOpen ? "open" : "closed"}
+        className={
+          "absolute w-110 z-50 h-screen bg-secondary flex flex-row-reverse transition-transform duration-300 data-[state=closed]:-translate-x-96"
+        }
+      >
+        <div className="flex flex-col items-center h-full p-2">
+          <Button
+            size="icon"
+            variant="ghost"
+            className="w-10 h-10"
+            onClick={() => setSidebarOpen((prev) => !prev)}
+          >
+            <PanelRightClose />
+          </Button>
+        </div>
+        <Separator className="w-10 bg-background" orientation="vertical" />
+        <div className="h-screen w-full p-2 flex flex-col">
+          <h2>Notes</h2>
+          <Separator
+            className="w-full bg-background"
+            orientation="horizontal"
+          />
+          <Accordion type="multiple">
+            <AccordionItem value="phil-food">
+              <AccordionTrigger>Philosophy of Food</AccordionTrigger>
+              <AccordionContent className="flex flex-col">
+                {philosophyNotes.length > 0 &&
+                  philosophyNotes.map((note) => (
+                    <Button
+                      key={note._id}
+                      variant="ghost"
+                      className="justify-start"
+                      onClick={() => addNote(note)}
+                    >
+                      {note.title}
+                    </Button>
+                  ))}
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="world-religion">
+              <AccordionTrigger>World Religion</AccordionTrigger>
+              <AccordionContent className="flex flex-col">
+                {religionNotes.length > 0 &&
+                  religionNotes.map((note) => (
+                    <Button
+                      key={note._id}
+                      variant="ghost"
+                      className="justify-start"
+                      onClick={() => addNote(note)}
+                    >
+                      {note.title}
+                    </Button>
+                  ))}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      </div>
+      <div className="pl-10 w-fit flex flex-row">
         <div className="flex flex-row w-full">
-          <MarkdownRenderer content={note.content} />
-          <MarkdownRenderer content={note.content} />
-          <MarkdownRenderer content={note.content} />
-          <MarkdownRenderer content={note.content} />
+          {openNotes.length > 0 &&
+            openNotes.map((note) => (
+              <>
+                <MarkdownRenderer
+                  key={note._id}
+                  note={note}
+                  onClose={() => closeNote(note)}
+                />
+                <Separator orientation="vertical" />
+              </>
+            ))}
         </div>
       </div>
     </div>

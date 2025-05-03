@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { ChevronLeft, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -57,15 +58,10 @@ export default function Contact() {
       subject: `Contact Form Submission from ${values.name}`,
       text: `Name: ${values.name}\nEmail: ${values.email}\nMessage: ${values.message}`,
     };
-    fetch("/api/emailer", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(data),
-    })
+    axios
+      .post("/api/emailer", data)
       .then((response) => {
-        if (response.ok) {
+        if (response.status === 200) {
           toast("Email sent successfully!");
           form.reset();
         } else {
